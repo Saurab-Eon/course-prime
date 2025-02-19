@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCERT-COURSE BOT</title>
+    <style>
+        * {
+          overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #008B8B;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-container a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .start-learning-btn {
+            background-color: #FFA500;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background-color: #0D9488;
+            color: white;
+            padding: 8rem 2rem 12rem;
+            position: relative;
+            min-width: 100%;
+            width: 100%;
+        }
+
+        .hero-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .learn-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            background: #FF8A3D;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-btn {
+            background: #FF8A3D;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .courses-btn {
+            background: transparent;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* .hero-curve {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: white;
+            border-top-right-radius: 100%;
+            border-top-left-radius: 100%;
+        } */
+
+        /* Platform Section */
+        .platform {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .platform-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .platform h2 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .platform-text {
+            flex: 1;
+        }
+
+        .platform-cta {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: right;
+        }
+
+        .view-courses-btn {
+            background: #FF8A3D;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        /* Target Audience */
+        .target-audience {
+            padding: 4rem 2rem;
+            background: #0D9488;
+            color: white;
+        }
+
+        .audience-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+        }
+
+        .audience-card {
+            padding-right: 2rem;
+        }
+
+        .audience-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .card-dash {
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: #FF8A3D;
+            margin-bottom: 1rem;
+        }
+
+        .study-card {
+            background: white;
+            color: black;
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        .get-started-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: black;
+            text-decoration: none;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        /* Features */
+        .features {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .features-intro {
+            max-width: 500px;
+        }
+
+        .features-intro h2 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: #FF8A3D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .rating-display {
+            text-align: right;
+        }
+
+        .rating-number {
+            font-size: 4rem;
+            font-weight: 700;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        .star-rating {
+            color: #FF8A3D;
+            margin-top: 1rem;
+        }
+
+
+
+        /* footer */
+        /* Footer */
+footer {
+  background: white;
+  padding: 4rem 1.5rem 2rem;
+}
+
+.footer-content {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-section a {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  color: #008B8B;
+}
+
+.footer-bottom {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  color: #4b5563;
+}
+
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .platform-container,
+            .audience-container,
+            .features-container,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #008B8B;
+                display: none;
+                padding: 1rem 0;
+            }
+
+              .nav-container.active {
+                display: flex;
+                z-index: 100000;
+            }
+
+              .hamburger {
+                display: flex;
+            }
+            .hero-buttons,
+            .platform-container {
+                flex-direction: column;
+            }
+
+            .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+        }
+
+
+
+    </style>
+</head>
+<body>
+       <!-- Navigation -->
+       <nav class="navbar">
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="nav-container">
+            <a href="index.html">Home</a>
+            <a href="all_courses.html">All Courses</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact</a>
+            <button class="start-learning-btn">START LEARNING</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="learn-badge">
+                <span class="badge-dot"></span>
+                LEARN WITH NCERT-BOT
+            </div>
+
+            <h1>
+                Master Your Studies<br>
+                with NCERT-BOT<br>
+                Expertise
+            </h1>
+
+            <p>
+                Interactive activities, personalized questions, and AI-powered learning.
+                QuestReader: Questions, activities, and more to fuel your understanding.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="chat-btn">CHAT WITH BOT</button>
+                <button class="courses-btn">ALL COURSES →</button>
+            </div>
+        </div>
+        <div class="hero-curve"></div>
+    </section>
+
+    <!-- Platform Section -->
+    <section class="platform">
+        <div class="platform-container">
+            <div class="platform-text">
+                <h2>Single platform, endless possibility</h2>
+                <p>Transforming information overload into manageable insights — consistently striving for clarity.</p>
+            </div>
+            <div class="platform-cta">
+                <button class="view-courses-btn">VIEW ALL COURSES</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="target-audience">
+        <div class="audience-container">
+            <div class="audience-card">
+                <span class="card-dash"></span>
+                <h3>Anyone with access to the Internet</h3>
+                <p>NCERT-BOT This is for anyone who just needs to get the gist of a long article. You can read this summary, then go read the original article if you want to.</p>
+            </div>
+
+            <div class="audience-card">
+                <span class="card-dash"></span>
+                <h3>Students</h3>
+                <p>NCERT-BOT This is for students studying for exams, who are overwhelmed by information overload. This tool will help them summarize information into a concise, easy to digest piece of text.</p>
+            </div>
+
+            <div class="audience-card">
+                <div class="study-card">
+                    <h3>Study With Your Own Personal pdf reader</h3>
+                    <h2>Boost Your Learning Skills With NCERT-BOT</h2>
+                    <a href="#" class="get-started-btn">GET STARTED →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="features-container">
+            <div class="features-intro">
+                <p>Features of Our NCERT-BOT</p>
+                <h2>Why Choose NCERT-BOT?</h2>
+                <p>NCERT-BOT This is a summarizing tool designed for students, writers, teachers, institutions, journalists, and any internet user who needs to quickly understand the essence of lengthy content.</p>
+            </div>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">👑</div>
+                    <div>
+                        <h3>Best PDF Summarizer</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⏰</div>
+                    <div>
+                        <h3>Help To Save Time</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📝</div>
+                    <div>
+                        <h3>Generate formal Q&A</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <div class="testimonials-header">
+                <div>
+                    <p>Testimonials</p>
+                    <h2>Trusted by Thousand of Students and Tutors</h2>
+                </div>
+                <div class="rating-display">
+                    <div class="rating-number">4.8</div>
+                    <div>⭐⭐⭐⭐⭐</div>
+                    <p>2,394 Ratings</p>
+                    <p>Google Reviews</p>
+                </div>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Efficient and Intuitive. Saves Time, Generates Questions, Fill in the Blanks, Summaries. Ideal for NCERT Exam Prep.</p>
+                    <p class="testimonial-author">Sonia Singh</p>
+                    <div class="star-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Engaging Interface, Relevant Questions, Comprehensive Fill in the Blanks, Concise Summaries. Perfect for NCERT Book Review.</p>
+                    <p class="testimonial-author">Shailendra Jaiswar</p>
+                    <div class="star-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">User-Friendly, Accurate Questions, Interactive Fill in the Blanks, Succinct Summaries. Simplifies NCERT Study Sessions.</p>
+                    <p class="testimonial-author">Gaurav Sharma</p>
+                    <div class="star-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Streamlined Interface, Diverse Questions, Concept Reinforcement with Fill in the Blanks, Effective Summaries. A Must-Have for NCERT Scholars.</p>
+                    <p class="testimonial-author">Anirudha Malpani</p>
+                    <div class="star-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <!-- About Section -->
+    <div class="footer-section">
+      <div class="logo"></div>
+      <p>Lorem ipsum dolor sit amet...</p>
+      <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Youtube</a>
+      </div>
+    </div>
+
+    <!-- Popular Courses -->
+    <div class="footer-section">
+      <h3>Popular Courses</h3>
+      <ul>
+        <li><a href="#">LMS Interactive Content</a></li>
+        <li><a href="#">Become a PHP Master</a></li>
+        <!-- Add more courses -->
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h3>Contact Info</h3>
+      <ul>
+        <li>
+          <strong>Address:</strong><br>
+          123 Fifth Avenue, New York, NY 10160
+        </li>
+        <li>
+          <strong>Phone:</strong><br>
+          929-242-6868
+        </li>
+        <li>
+          <strong>Email:</strong><br>
+          contact@info.com
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>Copyright © 2025 Books</p>
+    <p>Powered by Books</p>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+      document.querySelector(".nav-container").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>
+
+
+
+
+

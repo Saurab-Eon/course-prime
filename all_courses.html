@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Courses</title>
+
+    <style>
+        /* Base styles */
+body {
+  overflow-x: hidden;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Navigation */
+          .navbar {
+            background-color: #008B8B;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-container a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .start-learning-btn {
+            background-color: #FFA500;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+        }
+
+/* Hero Section */
+.hero {
+  min-width: 100vw;
+  background-color: #008B8B;
+  color: white;
+  padding: 5rem 1.5rem;
+  /* border-radius: 0 0 50px 50px; */
+  position: relative;
+}
+
+.hero-content {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3.75rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* Course Section */
+.course-section {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  display: flex;
+  gap: 3rem;
+}
+
+.filters {
+  width: 16rem;
+  flex-shrink: 0;
+}
+
+.filter-group {
+  margin-bottom: 2rem;
+}
+
+.filter-group h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.course-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s;
+}
+
+.course-card:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Newsletter Section */
+.newsletter {
+  background-color: #f3f4f6;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.subscribe-form {
+  display: flex;
+  gap: 1rem;
+  max-width: 36rem;
+  margin: 2rem auto 0;
+}
+
+.subscribe-form input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Footer */
+footer {
+  background: white;
+  padding: 4rem 1.5rem 2rem;
+}
+
+.footer-content {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-section a {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  color: #008B8B;
+}
+
+.footer-bottom {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  color: #4b5563;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .course-section {
+    flex-direction: column;
+  }
+  
+  .filters {
+    width: 100%;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .subscribe-form {
+    flex-direction: column;
+  }
+
+  .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #008B8B;
+                display: none;
+                padding: 1rem 0;
+            }
+
+              .nav-container.active {
+                display: flex;
+            }
+
+              .hamburger {
+                display: flex;
+            }
+  /* .hero{
+    width: 100vw;
+  } */
+}
+
+
+    </style>
+    
+    
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+  </div>
+  <div class="nav-container">
+      <a href="index.html">Home</a>
+      <a href="all_courses.html">All Courses</a>
+      <a href="about_us.html">About Us</a>
+      <a href="contact_us.html">Contact</a>
+      <button class="start-learning-btn">START LEARNING</button>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>All Books</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+  </div>
+</div>
+
+<div class="course-section">
+  <div class="filters">
+    <div class="filter-group">
+      <h3>Class</h3>
+      <label><input type="checkbox" class="class-filter" value="all" checked> All</label>
+      <label><input type="checkbox" class="class-filter" value="6"> Class 6</label>
+      <label><input type="checkbox" class="class-filter" value="7"> Class 7</label>
+      <label><input type="checkbox" class="class-filter" value="8"> Class 8</label>
+      <label><input type="checkbox" class="class-filter" value="9"> Class 9</label>
+      <label><input type="checkbox" class="class-filter" value="10"> Class 10</label>
+      <label><input type="checkbox" class="class-filter" value="11"> Class 11</label>
+      <label><input type="checkbox" class="class-filter" value="12"> Class 12</label>
+    </div>
+
+    <div class="filter-group">
+      <h3>Medium</h3>
+      <label><input type="radio" name="medium" class="medium-filter" value="all" checked> All</label>
+      <label><input type="radio" name="medium" class="medium-filter" value="english"> English</label>
+      <label><input type="radio" name="medium" class="medium-filter" value="hindi"> Hindi</label>
+      <label><input type="radio" name="medium" class="medium-filter" value="urdu"> Urdu</label>
+    </div>
+  </div>
+
+  <div class="courses">
+    <h2>Popular Courses</h2>
+    <div class="course-grid" id="courseGrid">
+      <!-- Courses will be populated here dynamically -->
+    </div>
+  </div>
+</div>
+
+
+<!-- Newsletter Section -->
+<div class="newsletter">
+  <h2>Join Our Community</h2>
+  <p>Enter your email address to register to our newsletter subscription delivered on regular basis!</p>
+  <div class="subscribe-form">
+    <input type="email" placeholder="Enter your email">
+    <button class="button-primary">Subscribe</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <!-- About Section -->
+    <div class="footer-section">
+      <div class="logo"></div>
+      <p>Lorem ipsum dolor sit amet...</p>
+      <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Youtube</a>
+      </div>
+    </div>
+
+    <!-- Popular Courses -->
+    <div class="footer-section">
+      <h3>Popular Courses</h3>
+      <ul>
+        <li><a href="#">LMS Interactive Content</a></li>
+        <li><a href="#">Become a PHP Master</a></li>
+        <!-- Add more courses -->
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h3>Contact Info</h3>
+      <ul>
+        <li>
+          <strong>Address:</strong><br>
+          123 Fifth Avenue, New York, NY 10160
+        </li>
+        <li>
+          <strong>Phone:</strong><br>
+          929-242-6868
+        </li>
+        <li>
+          <strong>Email:</strong><br>
+          contact@info.com
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>Copyright © 2025 Books</p>
+    <p>Powered by Books</p>
+  </div>
+</footer>
+
+
+
+
+
+
+<script>
+  const courses = [];
+  const courseGrid = document.getElementById("courseGrid");
+  const classFilters = document.querySelectorAll(".class-filter");
+  const mediumFilters = document.querySelectorAll(".medium-filter");
+  
+  // Generate courses dynamically
+  const classes = [6, 7, 8, 9, 10, 11, 12];
+  const mediums = ["English", "Hindi", "Urdu"];
+  
+  classes.forEach(cls => {
+    mediums.forEach(medium => {
+      courses.push({ class: cls, medium: medium.toLowerCase(), title: `Class ${cls} - ${medium}` });
+    });
+  });
+  
+  function renderCourses() {
+    courseGrid.innerHTML = "";
+    const selectedClasses = [...document.querySelectorAll(".class-filter:checked")].map(cb => cb.value);
+    const selectedMedium = document.querySelector(".medium-filter:checked").value;
+  
+    const filteredCourses = courses.filter(course => {
+      const classMatch = selectedClasses.includes("all") || selectedClasses.includes(course.class.toString());
+      const mediumMatch = selectedMedium === "all" || course.medium === selectedMedium;
+      return classMatch && mediumMatch;
+    });
+  
+    filteredCourses.forEach(course => {
+      const courseCard = document.createElement("div");
+      courseCard.classList.add("course-card");
+      courseCard.innerHTML = `<div class="course-header"><span class="icon">📚</span><h3>${course.title}</h3></div><button>READ MORE</button>`;
+      courseGrid.appendChild(courseCard);
+    });
+  }
+  
+  // Add event listeners
+  classFilters.forEach(filter => filter.addEventListener("change", renderCourses));
+  mediumFilters.forEach(filter => filter.addEventListener("change", renderCourses));
+  
+  // Initial render
+  renderCourses();
+  </script>
+
+
+
+
+
+<!--last second section-->
+
+<!-- 
+<div data-section="section-primary-footer-builder" class="DIV-0l">
+    <div class="DIV-1l">
+      <div class="DIV-2l">
+        <div class="DIV-3l">
+          <aside
+            data-section="sidebar-widgets-footer-widget-1"
+            aria-label="Footer Widget 1"
+            class="ASIDE-0l"
+          >
+            <section class="SECTION-0l">
+              <img
+                width="224"
+                height="60"
+                src="https://dev-ncert-books-chatbot.pantheonsite.io/wp-content/uploads/2020/04/logo-regular-160x43.png"
+                alt=""
+                decoding="async"
+                srcset="
+                  https://dev-ncert-books-chatbot.pantheonsite.io/wp-content/uploads/2020/04/logo-regular.png 1x,
+                  https://dev-ncert-books-chatbot.pantheonsite.io/wp-content/uploads/2020/04/logo-retina.png  2x
+                "
+                sizes="(max-width: 224px) 100vw, 224px"
+                class="IMG-0l"
+              />
+            </section>
+            <section class="SECTION-1l">
+              <div class="DIV-4l">
+                <p class="P-0l">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim.
+                </p>
+              </div>
+            </section>
+          </aside>
+          <div data-section="section-fb-social-icons-1" class="DIV-5l">
+            <div class="DIV-6l">
+              <div class="DIV-7l">
+                <a
+                  href="#"
+                  aria-label="Facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="A-0l"
+                >
+                  <span class="SPAN-0l">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      class="svg-0l"
+                    >
+                      <path
+                        d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"
+                        class="path-0l"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
+                <a
+                  href="#"
+                  aria-label="Twitter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="A-1l"
+                >
+                  <span class="SPAN-1l">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      class="svg-1l"
+                    >
+                      <path
+                        d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                        class="path-1l"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
+                <a
+                  href="#"
+                  aria-label="Pinterest"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="A-2l"
+                >
+                  <span class="SPAN-2l">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 496 512"
+                      class="svg-2l"
+                    >
+                      <path
+                        d="M496 256c0 137-111 248-248 248-25.6 0-50.2-3.9-73.4-11.1 10.1-16.5 25.2-43.5 30.8-65 3-11.6 15.4-59 15.4-59 8.1 15.4 31.7 28.5 56.8 28.5 74.8 0 128.7-68.8 128.7-154.3 0-81.9-66.9-143.2-152.9-143.2-107 0-163.9 71.8-163.9 150.1 0 36.4 19.4 81.7 50.3 96.1 4.7 2.2 7.2 1.2 8.3-3.3.8-3.4 5-20.3 6.9-28.1.6-2.5.3-4.7-1.7-7.1-10.1-12.5-18.3-35.3-18.3-56.6 0-54.7 41.4-107.6 112-107.6 60.9 0 103.6 41.5 103.6 100.9 0 67.1-33.9 113.6-78 113.6-24.3 0-42.6-20.1-36.7-44.8 7-29.5 20.5-61.3 20.5-82.6 0-19-10.2-34.9-31.4-34.9-24.9 0-44.9 25.7-44.9 60.2 0 22 7.4 36.8 7.4 36.8s-24.5 103.8-29 123.2c-5 21.4-3 51.6-.9 71.2C65.4 450.9 0 361.1 0 256 0 119 111 8 248 8s248 111 248 248z"
+                        class="path-2l"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
+                <a
+                  href="#"
+                  aria-label="YouTube"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="A-3l"
+                >
+                  <span class="SPAN-3l">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 576 512"
+                      class="svg-3l"
+                    >
+                      <path
+                        d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
+                        class="path-3l"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="DIV-8l">
+          <aside
+            data-section="sidebar-widgets-footer-widget-2"
+            aria-label="Footer Widget 2"
+            class="ASIDE-1l"
+          >
+            <section class="SECTION-2l">
+              <h2 class="H2-0l">   Popular Courses</h2>
+              <nav aria-label="Popular Courses" class="NAV-0l">
+                <ul class="UL-0l">
+                  <li class="LI-0l">
+                    <a href="#" class="A-4l">LMS Interactive Content</a>
+                  </li>
+                  <li class="LI-1l">
+                    <a href="#" class="A-5l">Become a PHP Master</a>
+                  </li>
+                  <li class="LI-2l">
+                    <a href="#" class="A-6l">HTML5/CSS3 Essentials</a>
+                  </li>
+                  <li class="LI-3l">
+                    <a href="#" class="A-7l">JavaScript Development</a>
+                  </li>
+                  <li class="LI-4l">
+                    <a href="#" class="A-8l">WordPress Basic Tutorial</a>
+                  </li>
+                  <li class="LI-5l">
+                    <a href="#" class="A-9l">Introduction to Coding</a>
+                  </li>
+                </ul>
+              </nav>
+            </section>
+          </aside>
+        </div>
+        <div class="DIV-9">
+          <aside
+            data-section="sidebar-widgets-footer-widget-3"
+            aria-label="Footer Widget 3"
+            class="ASIDE-2l"
+          >
+            <section class="SECTION-3l">
+              <h2 class="H2-1l">Contact Info</h2>
+              <div class="DIV-10l">
+                <p class="P-1l">
+                  <strong class="STRONG-0l">Address</strong>
+                  <br class="BR-0l" />
+                  123 Fifth Avenue, New York, NY 10160
+                  <br class="BR-1l" />
+                  <strong class="STRONG-1l">Phone</strong>
+                  <br class="BR-2l" />
+                  929-242-6868
+                  <br class="BR-3l" />
+                  <strong class="STRONG-2l">Email</strong>
+                  <br class="BR-4l" />
+                  contact@info.com
+                </p>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+
+
+
+</div> -->
+
+
+
+ <!--footer-->
+<!-- <div>
+
+    <div data-section="section-below-footer-builder" class="DIV-0z">
+        <div class="DIV-1z">
+          <div class="DIV-2z">
+            <div class="DIV-3z">
+              <div data-section="section-footer-builder" class="DIV-4z">
+                <div class="DIV-5z"><p class="P-0z">Copyright © 2025 Books</p></div>
+              </div>
+            </div>
+            <div class="DIV-6z">
+              <div data-section="section-fb-html-1" class="DIV-7z">
+                <div class="DIV-8">
+                  <div class="DIV-9z"><p class="P-1z">Powered by Books</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div> -->
+
+<script>
+  function toggleMenu() {
+      document.querySelector(".nav-container").classList.toggle("active");
+  }
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
