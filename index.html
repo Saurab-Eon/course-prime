@@ -394,6 +394,9 @@ footer {
 
 
         @media (max-width: 768px) {
+            body.no-scroll {
+                overflow: hidden;
+            }
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -405,26 +408,34 @@ footer {
                 grid-template-columns: 1fr;
             }
 
-            .nav-container {
+            
+                .nav-container {
                 flex-direction: column;
                 align-items: flex-start;
-                position: absolute;
+                position: fixed; /* 🔹 Fixes it in place */
                 top: 60px;
                 left: 0;
-                width: 100%;
+                width: 30%;
+                height: 60vh; /* 🔹 Full height */
                 background-color: #008B8B;
                 display: none;
                 padding: 1rem 0;
+                z-index: 1000;
             }
 
-              .nav-container.active {
+            .nav-container.active {
                 display: flex;
-                z-index: 100000;
             }
 
-              .hamburger {
+            .hamburger {
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                z-index: 1100;
                 display: flex;
             }
+
+
             .hero-buttons,
             .platform-container {
                 flex-direction: column;
@@ -464,7 +475,7 @@ footer {
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <div class="hero">
         <div class="hero-container">
             <div class="learn-badge">
                 <span class="badge-dot"></span>
@@ -488,7 +499,7 @@ footer {
             </div>
         </div>
         <div class="hero-curve"></div>
-    </section>
+    </div>
 
     <!-- Platform Section -->
     <section class="platform">
@@ -655,10 +666,14 @@ footer {
 </footer>
 
 <script>
-  function toggleMenu() {
-      document.querySelector(".nav-container").classList.toggle("active");
-  }
-</script>
+    function toggleMenu() {
+      var nav = document.querySelector(".nav-container");
+      var body = document.querySelector("body");
+  
+      nav.classList.toggle("active");
+      body.classList.toggle("no-scroll"); // Prevent body scroll when menu is open
+    }
+  </script>
 
 </body>
 </html>
