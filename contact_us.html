@@ -265,25 +265,29 @@
             }
 
             .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: #008B8B;
-    display: none;
-    padding: 1rem 0;
-    z-index: 10010; /* Higher than hero */
-}
+                flex-direction: column;
+                align-items: flex-start;
+                position: fixed; /* 🔹 Fixes it in place */
+                top: 60px;
+                left: 0;
+                width: 30%;
+                height: 60vh; /* 🔹 Full height */
+                background-color: #008B8B;
+                display: none;
+                padding: 1rem 0;
+                z-index: 1000;
+            }
 
-              .nav-container.active {
+            .nav-container.active {
                 display: flex;
             }
 
-              .hamburger {
+            .hamburger {
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                z-index: 1100;
                 display: flex;
-                z-index: 1002;
             }
 
             .copyright {
